@@ -1,0 +1,6 @@
+1) from my github account i have downloaded the hello-world repository
+2) then modified the readme.md file in it and commited the changes
+3) Also modified the readme.md file on remote server repository
+4) now using git fetch command i tried to merge the changes and it lead to conflict
+5) now edited the local readme.md file to solve the conflict
+6) again used git rebase --continue command to continue merging

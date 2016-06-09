@@ -1,0 +1,4 @@
+1) downloaded the remote repository hello-world
+2) added new branch named new using "git branch new"
+3) listed all branches
+4) modified some files in it after switching to that branch

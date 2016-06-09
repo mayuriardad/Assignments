@@ -1,0 +1,5 @@
+1) using git reflog command it shows all the history of things done 
+2) I have used commit reset to demonstrate use of reflog
+3) I have reset head to second commit and displayed the git log
+4) then again using reflog retrieved the sha of lost commit
+5) and the retrieved the original commit back

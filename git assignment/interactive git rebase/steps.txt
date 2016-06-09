@@ -1,0 +1,7 @@
+1) In my local machine I have downloaded the hello-world repository
+2) In it created new branch named new
+3) now modified some files with new branch and added one commit for each modification
+4) now to demonastrate interactive rebase i have used interactive rebase with last 3 commits
+5) git rebase -i HEAD~3
+6) now as editor appears i have dropped one commit
+7) I have also squashed 2 commits
