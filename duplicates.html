@@ -1,0 +1,36 @@
+<html>
+<title> Browser information </title>
+
+<script>
+function duplicates(array)
+{
+
+var duplicate=[]
+var i=0
+var l=0
+array=array.sort()
+//document.write(array)
+for(i=0;i<array.length;i++)
+{
+var tmp1=array[i];
+var tmp2=array[i+1]
+if (tmp1==tmp2)
+{
+	duplicate[l++]=tmp1
+	i++
+}
+
+}
+return duplicate;
+
+}
+var array=[0,2,2,6,5,3,5,7,6,0];
+var duplicate=duplicates(array);
+
+document.write("duplicates ");
+for(var k=0;k<duplicate.length;k++)
+{
+document.write(duplicate[k]+" ");
+}
+</script>
+</html>

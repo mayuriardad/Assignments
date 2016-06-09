@@ -1,0 +1,56 @@
+<html>
+<title>Number game</title>
+<script>
+function noGame()
+{
+	var student={
+	David:80,
+	Vinoth:77,
+	Divya:88,
+	Ishitha:95,
+	Thomas:68,
+	john:56
+
+	};
+	sum=0
+	count=0
+	for (var key in student)
+	{
+		
+		marks=student[key]
+		switch(true)
+		{
+			case marks<60:
+				document.write(""+key+" : <div >grade F</div>"); 
+				break;
+			case marks<70:
+				document.write(""+key+" : <div >grade D</div >"); 
+				break;
+			case marks<80:
+				document.write(""+key+" : <div >grade C</div >"); 
+				break;
+			case marks<90:
+				document.write(""+key+" : <div >grade B</div >"); 
+				break;
+			case marks<100:
+				document.write(""+key+" : <div >grade A</div >"); 
+				break;
+		}
+
+	}
+	//document.write("marks "+student[0].David)
+	/*for (var key in student)
+	{
+		//document.write(key)
+		document.write("marks "+student[key]+"<br>")
+	
+		sum=sum+student[key]
+		count++;
+
+	}
+	document.write(count)
+	document.write("sum="+sum)*/
+}
+noGame()
+</script>
+</html>
