@@ -1,0 +1,236 @@
+1) create tables 
+	Users
+	Posts
+	Friends
+	Comments
+
+Queries
+
+CREATE TABLE  "USERS" 
+   (	"USER_ID" NUMBER NOT NULL ENABLE, 
+	"USERNAME" VARCHAR2(30) NOT NULL ENABLE, 
+	"EMAIL_ID" VARCHAR2(30) NOT NULL ENABLE, 
+	"PASSWORD" BINARY_DOUBLE NOT NULL ENABLE, 
+	 CONSTRAINT "USERS_PK" PRIMARY KEY ("USER_ID") ENABLE
+   ) ;
+
+CREATE OR REPLACE TRIGGER  "BI_USERS" 
+  before insert on "USERS"               
+  for each row  
+begin   
+  if :NEW."USER_ID" is null then 
+    select "DEMO_USERS_SEQ".nextval into :NEW."USER_ID" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_USERS" ENABLE;
+
+
+CREATE table "FRIENDS" (
+    "USER_ID"        NUMBER NOT NULL,
+    "USER_ID2"       NUMBER NOT NULL,
+    "STATUS"         NUMBER(0,4) NOT NULL,
+    "ACTION_USER_ID" NUMBER NOT NULL,
+    constraint  "FRIENDS_PK" primary key ("USER_ID")
+)
+/
+
+CREATE trigger "BI_FRIENDS"  
+  before insert on "FRIENDS"              
+  for each row 
+begin  
+  if :NEW."USER_ID" is null then
+    select "DEMO_USERS_SEQ".nextval into :NEW."USER_ID" from dual;
+  end if;
+end;
+/   
+
+ALTER TABLE "FRIENDS" ADD CONSTRAINT "FRIENDS_FK" 
+FOREIGN KEY ("USER_ID")
+REFERENCES "USERS" ("USER_ID")
+
+/
+ALTER TABLE "FRIENDS" ADD CONSTRAINT "FRIENDS_FK2" 
+FOREIGN KEY ("USER_ID2")
+REFERENCES "USERS" ("USER_ID")
+
+/
+
+
+   
+
+CREATE table "POSTED_ARTICLES" (
+    "USER_ID"    NUMBER NOT NULL,
+    "ARTICLE_ID" NUMBER NOT NULL,
+    "POST_DATE"  DATE NOT NULL
+)
+/
+
+alter table "POSTED_ARTICLES" add constraint  "POSTED_ARTICLES_PK" primary key ("USER_ID","ARTICLE_ID")
+/
+
+ALTER TABLE "POSTED_ARTICLES" ADD CONSTRAINT "POSTED_ARTICLES_FK" 
+FOREIGN KEY ("USER_ID")
+REFERENCES "USERS" ("USER_ID")
+
+/
+ALTER TABLE "POSTED_ARTICLES" ADD CONSTRAINT "POSTED_ARTICLES_FK2" 
+FOREIGN KEY ("ARTICLE_ID")
+REFERENCES "ARTICLES" ("ARTICLE_ID")
+
+/
+
+CREATE table "COMMENTS" (
+    "USER_ID"      NUMBER NOT NULL,
+    "USER_ID2"     NUMBER NOT NULL,
+    "ARTICLE_ID"   NUMBER NOT NULL,
+    "COMMENT_TEXT" VARCHAR2(500) NOT NULL
+)
+/
+
+ALTER TABLE "COMMENTS" ADD CONSTRAINT "COMMENTS_FK" 
+FOREIGN KEY ("USER_ID")
+REFERENCES "USERS" ("USER_ID")
+
+/
+ALTER TABLE "COMMENTS" ADD CONSTRAINT "COMMENTS_FK2" 
+FOREIGN KEY ("USER_ID2")
+REFERENCES "USERS" ("USER_ID")
+
+/
+ALTER TABLE "COMMENTS" ADD CONSTRAINT "COMMENTS_FK3" 
+FOREIGN KEY ("ARTICLE_ID")
+REFERENCES "ARTICLES" ("ARTICLE_ID")
+
+/
+
+2) Insert data to respective tables
+begin
+insert into users values(2,'pooja','pooja@gmail.com','pooja');
+insert into users values(3,'raj','raj@gmail.com','raj');
+insert into users values(4,'anjali','anjali@gmail.com','anjali');
+insert into users values(5,'manali','manali@gmail.com','manali');
+end
+
+begin
+insert into friends values(1,2,0,1);
+insert into friends values(2,3,1,2);
+insert into friends values(2,4,2,2);
+insert into friends values(3,4,3,3);
+insert into friends values(4,5,0,4);
+insert into friends values(5,2,1,5);
+insert into friends values(3,5,2,3);
+end
+
+
+begin
+insert into posts values(1,1,'Oracle PL/SQL celebrates its 22nd birthday in 2011. I know this because I am looking at the first Oracle PL/SQL user guide ever published; it is for PL/SQL Release 1.0, and its date of publication is September 1989. ',TO_DATE('2016/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into posts values(2,2,'I have a date field in an Oracle table and I want to insert a new record. Im trying to insert a date with a time component into this field but Im having some problems.',TO_DATE('2016/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into posts values(3,3,'LEFT joins will be used in the cases where you wish to retrieve all the data from the table in the left hand side and only data from the right that match.',TO_DATE('2016/05/07 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into posts values(4,4,'JOINS are used when you start normalizing your table structure. You can crete a table with 100s on columns, where a lot of the data could possibly be NULL, or you can normalize the tables, such that you avoid having too many columns with null values, where you group the appropriate data into table structures.',TO_DATE('2016/05/04 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into posts values(1,6,'Have a look . Its been around for a while, is very feature-complete, and open-source, so you can look at the schema and get very good ideas about one way to solve many modeling problems.',TO_DATE('2016/06/05      21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into posts values(2,5,'Oracle PL/SQL celebrates its 22nd birthday in 2011. I know this because I am looking at the first Oracle PL/SQL user guide ever published; it is for PL/SQL Release 1.0, and its date of publication is September 1989. ',TO_DATE('2016/05/06 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+end
+
+CREATE table "COMMENTS" (
+    "USER_ID"         NUMBER NOT NULL,
+    "ARTICLE_USER_ID" NUMBER NOT NULL,
+    "ARTICLE_ID"      NUMBER NOT NULL,
+    "COMMENT_POSTED"  VARCHAR2(400) NOT NULL
+)
+/
+
+ALTER TABLE "COMMENTS" ADD CONSTRAINT "COMMENTS_FK" 
+FOREIGN KEY ("USER_ID")
+REFERENCES "USERS" ("USER_ID")
+
+/
+ALTER TABLE "COMMENTS" ADD CONSTRAINT "COMMENTS_FK2" 
+FOREIGN KEY ("ARTICLE_USER_ID","ARTICLE_ID")
+REFERENCES "POSTS" ("USER_ID","ARTICLE_ID")
+
+/
+
+begin
+insert into comments values(1,2,2,'Nice information');
+insert into comments values(2,1,1,'some changes');
+insert into comments values(3,3,3,'very good');
+insert into comments values(4,4,4,'solved my problem');
+insert into comments values(4,2,5,'ok good');
+end
+
+
+
+Query 1) 
+friend requests for user_id=1
+
+SELECT username,friends.user_id2
+FROM users
+inner JOIN friends
+ON users.user_id=friends.user_id2 and status=0 and friends.user_id=1;
+ 
+query 2)
+comments by user id=1
+
+SELECT username,comments.comment_posted,article_user_id
+FROM users
+inner JOIN comments
+ON users.user_id=comments.user_id and users.user_id=1;
+
+query 3)
+
+posts by user_id 1
+SELECT users.user_id, posts.content
+FROM users
+inner JOIN posts
+ON users.user_id=posts.user_id and users.user_id=1;
+
+
+count of comments by user_id=1
+
+SELECT count(article_user_id)
+FROM users
+inner JOIN comments
+ON users.user_id=comments.user_id and users.user_id=1;
+
+count of posts by user_id=1
+
+SELECT count(users.user_id)
+FROM users
+inner JOIN posts
+ON users.user_id=posts.user_id and users.user_id=1;
+
+count of friend requests
+SELECT count(friends.user_id2)
+FROM users
+inner JOIN friends
+ON users.user_id=friends.user_id2 and status=0 and friends.user_id=1;
+
+
+count of friends
+SELECT count(friends.user_id2)
+FROM users
+inner JOIN friends
+ON users.user_id=friends.user_id2 and status=1 and friends.user_id=1;
+
+
+4) stored procedure to get count of friends 
+create or replace procedure getFriendCount4(id in number)
+as
+frnd_count INT; 
+begin
+
+SELECT count(friends.user_id2) into frnd_count
+FROM users
+inner JOIN friends
+ON users.user_id=friends.user_id2 and status=0 and friends.user_id=id;
+
+dbms_output.put_line('count' || frnd_count);
+end getFriendCount4;
+
+begin 
+getFriendCount4(1);
+end;
+
+
