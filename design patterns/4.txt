@@ -1,0 +1,78 @@
+a) factory design pattern
+b) 
+
+
+public abstract class sort
+{
+
+	public void sort_logic(List pcs)
+	{
+	}
+}
+class quick_sort extends sort
+{
+	public void sort_logic(List pcs)
+	{
+		// implementation of quick sort logic
+	}
+}
+
+class sequential_sort extends sort
+{
+	public void sort_logic(List pcs)
+	{
+		// implementation of sequential sort logic
+	}
+}
+
+class merge_sort extends sort
+{
+	public void sort_logic(List pcs)
+	{
+		// implementation of merge sort logic
+	}
+}
+
+class bubble_sort extends sort
+{
+	public void sort_logic(List pcs)
+	{
+		// implementation of bubble sort logic
+	}
+}
+
+
+
+class Sort_factory
+{
+	public Sort get_sort(string sort_type)
+	{
+		if(sort_type.equals("merge"))
+		{
+			return new merge_sort();
+		}
+		else if(sort_type.equals("quick"))
+		{
+			return new quick_sort();
+		}
+		else if(sort_type.equals("sequential"))
+		{
+			return new sequential_sort();
+		}
+		else if(sort_type.equals("bubble"))
+		{
+			return new bubble_sort();
+		}
+	}
+}
+class get_PCList_Sorted
+{
+	List PC_performance;
+	public static void main(String []args)
+	{
+	Sort_factory sort_factory=new Sort_factory()
+	String sortType=scanner.readLine()// input from user
+	Sort sort=sort_factory.get_sort(sortType)
+	sort.sort_logic(PC_performance)
+	}
+}

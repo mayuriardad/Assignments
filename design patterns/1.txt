@@ -1,0 +1,180 @@
+1. composite design pattern
+
+public abstract class component
+{
+public netPrice()
+{}
+public powerConsumption()
+{}
+
+}
+
+class Bus extends component
+{
+	Network_card card;
+	double net_price;
+	double power;
+	Bus()
+	{
+		card=new Network_card()
+		net_price==15.00;
+		power=200;
+	} 
+	public double netPrice()
+	{
+		return net_price+card.netPrice()
+	}
+	public double powerConsumption()
+	{
+		return power+card.power_consumption()
+	}
+}
+class Floppy_disk implements component
+{
+	double net_price;
+	double power;
+	
+	Floppy_disk()
+	{
+	//assigns suitable values to new price and power consumption
+	}
+	public double netPrice()
+	{
+		return net_price
+	}
+	public double powerConsumption()
+	{
+		return power
+	}	
+}
+
+class Memory_unit extends component
+{
+	double net_price;
+	double power;
+	
+	Memory_unit ()
+	{
+	//assigns suitable values to new price and power consumption
+	}
+	public double netPrice()
+	{
+		return net_price
+	}
+	public double  powerConsumption()
+	{
+		return power
+	}
+}
+class CPU implements component
+{
+	double net_price;
+	double power;
+	
+	CPU()
+	{
+	//assigns suitable values to new price and power consumption
+	}
+	public double netPrice()
+	{
+		return net_price
+	}
+	public double  powerConsumption()
+	{
+		return power
+	}
+}
+class Power_supply extends component
+{
+	double net_price;
+	double power;
+	
+	Power_supply()
+	{
+	//assigns suitable values to new price and power consumption
+	}
+	public double netPrice()
+	{
+		return net_price
+	}
+	public double powerConsumption()
+	{
+		return power
+	}
+}
+class Network_card extends component
+{
+	double net_price;
+	double power;
+	
+	Network_card()
+	{
+	//assigns suitable values to new price and power consumption
+	}
+	public double netPrice()
+	{
+		return net_price
+	}
+	public double powerConsumption()
+	{
+		return power
+	}
+}
+class Chassis extends component
+{
+	Bus bus;
+	Floopy_disk disk;
+	Memory_unit memory_unit;
+	CPU cpu;
+	Power_supply power;
+	Chassis()
+	{
+		bus =new Bus()
+		disk= new Floopy_disk()
+		memory_unit = new Memory_unit() 
+		cpu =new CPU ()
+		power=new Power_supply() 
+
+	}	
+	public double netPrice()
+	{
+		return bus.netPrice()+disk.netPrice()+memory_unit.netPrice()+cpu.netPrice			()+power.netPrice()
+	}
+	public double powerConsumption()
+	{
+		return return bus.powerConsumption()+disk.powerConsumption()+memory_unit.powerConsumption	()+cpu.powerConsumption()+power.powerConsumption()
+	}	
+	
+}
+class Cabinet extends component
+{
+	Chassis chassis;
+	Cabinet()
+	{
+		chassis= new Chasis()
+	}
+	public double netPrice()
+	{
+		return chassis.net_price()
+	}
+	public double powerConsumption()
+	{
+		return chassis.powerConsumption()
+	}
+}
+class PC extends component
+{
+	Cabinet cabinet;
+	PC()
+	{
+		cabinet=new Cabinet()
+	}
+	public double netPrice()
+	{
+		return cabinet.net_price()
+	}
+	public double powerConsumption()
+	{
+		return cabinet.powerConsumption()
+	}
+}

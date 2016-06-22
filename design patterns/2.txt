@@ -1,0 +1,81 @@
+a) Factory Design Pattern
+b)
+abstract class PC 
+{
+	Chassis chassis;
+	Cabinet cabinet;
+// abstarct methods
+}
+class DesktopPC extends PC
+{
+	public DesktopPC()
+	{
+		chassis=new DesktopChassis();
+		cabinet=new DesktopCabinet();
+	}
+}
+class TowerPC extends PC
+{
+	public TowerPC()
+	{
+		chassis=new TowerChassis()
+		cabinet=new TowerCabinet()
+	}
+
+}
+
+abstract class Chassis
+{
+}
+class DesktopChassis extends Chassis
+{
+
+}
+class TowerChassis extends Chassis
+{
+
+}
+abstract class Cabinet
+{
+}
+
+class DesktopCabinet extends Cabinet
+{
+
+}
+class TowerCabinet extends Cabinet
+{
+
+}
+
+class PCFactory
+{
+	Pc pc;
+	
+	PC getPC(String type)
+	{
+		if(type.equals("desktop"))
+		{
+			pc= new DesktopPC();
+		}
+		else
+		{
+			pc= new TowerPC();
+		}
+		return pc;	
+	}
+	
+}
+class UsePCFactory
+{
+	String type
+	public static void main(String [] args)
+	{
+		Scanner sc= new Scanner(System.in)
+		type=sc.readLine()
+		PCFactory factory=new PCFactory()
+		factory.getPC(type)
+	}
+}
+	}
+}
