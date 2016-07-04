@@ -1,0 +1,34 @@
+Consider the Login system
+where user needs to enter name, email, username,password(more than 8 characters, alphanumeric)
+sample space for input
+[{abc, abc@gmail.com, abcs, ab@23456},
+{pqr, pqr@gmail, pqrs, ab3456},
+{xyz, xyz23@yahoo.com, xyzb, xyz@23456},
+{mnb, mnb23@yahoo.com, mnbv, mnb@56}]
+
+sample space for output
+
+[success,error(email incorect),
+success,error(password criteria not satified)]
+
+
+Positive input
+
+{abc, abc@gmail.com, abcs, ab@23456}
+{xyz, xyz23@yahoo.com, xyzb, xyz@23456}
+
+negative input 
+{pqr, pqr@gmail, pqrs, ab3456}
+{mnb, mnb23@yahoo.com, mnbv, mnb@56}
+
+when name is abc, email is abc@gmail.com, username is abcs and password is ab@23456 output is success,
+
+when name is pqr, email is pqr@gmail, username is pqrs and password is ab3456 output is error email incorrect
+
+when name is xyz, email is xyz23@yahoo.com, username is xyzb and password is xyz@23456 output is success
+
+when name is mnb, email is mnb23@yahoo.com, username is mnbv and password is mnb@56 output is error password criteria not satified
+
+
+
+
